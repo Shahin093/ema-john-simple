@@ -7,20 +7,56 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     useEffect(() => {
+        // console.log('products load before fetch');
         fetch('products.json')
             .then(res => res.json())
-            .then(data => setProducts(data))
+            .then(data => {
+                setProducts(data)
+                // console.log('product loadadded')
+            })
     }, [])
 
     useEffect(() => {
         const storedCart = getStoredCart();
+        // console.log('strodcart ', storedCart);
+        const saveCart = [];
+        // console.log('Local storage first line ');
         // console.log(storedCart);
         for (const id in storedCart) {
             // console.log(id);
-            const addedProduct = products.find(product => product.id);
-            console.log(addedProduct);
+            const addedProduct = products.find(product => product.id === id);
+            // console.log('addedproduct : ', addedProduct);
+            if (addedProduct) {
+                const quantity = storedCart[id];
+                // console.log('id', quantity)
+                addedProduct.quantity = quantity;
+
+                // console.log(addedProduct);
+                saveCart.push(addedProduct);
+                // console.log('save : ', saveCart);
+
+            }
+            setCart(saveCart);
+            // console.log(addedProduct);
         }
-    }, [])
+        // console.log('Local storage finish');
+    }, [products])
+
+    /* useEffect(() => {
+        const storedcart = getStoredCart();
+        const saveCart = [];
+        for (const id in storedcart) {
+            const addedProduct = products.find(product => product.id === id);
+            if (addedProduct) {
+                const quantity = storedcart[id];
+                storedcart.quantity = quantity;
+                saveCart.push(storedcart);
+            }
+        }
+        setCart(saveCart);
+    }, [products]) */
+
+
 
     const handleAddToCart = (product) => {
         // console.log('clicked', product)
