@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import useCart from '../../hooks/useCart';
 import useProducts from '../../hooks/useProduct';
 import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
@@ -7,15 +8,7 @@ import './Shop.css';
 const Shop = () => {
     const [products, setProducts] = useProducts();
     const [cart, setCart] = useState([]);
-    // useEffect(() => {
-    //     // console.log('products load before fetch');
-    //     fetch('products.json')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setProducts(data)
-    //             // console.log('product loadadded')
-    //         })
-    // }, [])
+    // const [cart, setCart] = useCart(products);
 
     useEffect(() => {
         const storedCart = getStoredCart();
