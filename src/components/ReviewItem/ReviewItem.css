@@ -22,3 +22,18 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.delete-icon {
+    color: rgba(235, 87, 87, 1);
+    font-size: 27px;
+}
+
+.review-item .delete-btn {
+    background-color: rgba(87, 87, 0.3);
+    border: 0;
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+
+}
